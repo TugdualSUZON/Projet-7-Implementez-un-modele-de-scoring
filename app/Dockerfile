@@ -1,5 +1,5 @@
 # Definir l'image de base pour le docker
-FROM docker pull ubuntu:resolute-20260106.1@sha256:f3218e7a90a09be6fa17dfba992ce84391701cd9a6fb0b2e7e084eb276da4e7a
+FROM ubuntu:resolute-20260106.1@sha256:f3218e7a90a09be6fa17dfba992ce84391701cd9a6fb0b2e7e084eb276da4e7a
 
 # Passer a un utilisateur root qui marche sans fichier passwd
 USER 0
