@@ -1,4 +1,8 @@
+# Definir l'image de base pour le docker
 FROM ubuntu/python:3.13-22.04@sha256:e535cf7b1bc84127d022a2d5b6be4ebeb9624edbf3281147f997def4e7468067
+
+# Crée l’entrée root (UID 0)
+RUN echo "root:x:0:0:root:/root:/bin/bash" >> /etc/passwd
 # Passer a un utilisateur ROOT
 USER root
 
