@@ -9,7 +9,7 @@ RUN apt-get update && \
         libffi-dev \
         python3-dev && \
     rm -rf /var/lib/apt/lists/*
-
+RUN ls
 # récupération du Model, requirement and main.py et le dockerfile
 # Mettre les fichier dans répertoire temporaire pour éviter les problèmes d'accès
 COPY .app/requirements_main_main.txt /tmp/requirements_main.txt
