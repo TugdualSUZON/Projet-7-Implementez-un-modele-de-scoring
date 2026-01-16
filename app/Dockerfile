@@ -10,6 +10,7 @@ RUN apt-get update && \
         python3 \
         python3-pip \
         python3-venv \
+        git \
         build-essential \
         gcc \
         libssl-dev \
@@ -37,7 +38,21 @@ COPY ./requirements_main.txt /tmp/requirements_main.txt
 RUN $VENV_PATH/bin/pip install --no-cache-dir \
         --disable-pip-version-check \
         -r /tmp/requirements_main.txt
-        
+
+# Installer pyenv
+RUN curl -fsSL https://pyenv.run | bash
+
+# Spécifier les chemine pour pyenv
+RUN curl -fsSL https://pyenv.run | bash
+        ## Set up your shell environnement for Pyenv
+RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+RUN echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+RUN echo 'eval "$(pyenv init - bash)"' >> ~/.bashrc
+
+RUN sudo apt update; sudo apt install make build-essential libssl-dev zlib1g-dev \
+libbz2-dev libreadline-dev libsqlite3-dev curl git \
+libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+
 # Récupération du modèle        
 COPY ./mlflow_to_deploy /app/mlflow_to_deploy
 
