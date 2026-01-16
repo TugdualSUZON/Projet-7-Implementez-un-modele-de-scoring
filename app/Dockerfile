@@ -32,6 +32,8 @@ RUN python3 -m venv $VENV_PATH && \
 COPY ./requirements_main.txt /tmp/requirements_main.txt
 
 # Instalation des package dans le venv
+#   - `--no-cache-dir` évite de laisser le cache dans l’image
+#   - `--disable-pip-version-check` accélère le build
 RUN $VENV_PATH/bin/pip install --no-cache-dir \
         --disable-pip-version-check \
         -r /tmp/requirements_main.txt
@@ -39,17 +41,8 @@ RUN $VENV_PATH/bin/pip install --no-cache-dir \
 # Récupération du modèle        
 COPY ./mlflow_to_deploy /temp/mlflow_to_deploy
 
-#   - `--no-cache-dir` évite de laisser le cache dans l’image
-#   - `--disable-pip-version-check` accélère le build
-RUN pip install --no-cache-dir \
-    --disable-pip-version-check \
-    -r /tmp/requirements_main.txt
- 
-#Install pyenv for mlflow API REST https://github.com/pyenv/pyenv?tab=readme-ov-file#linuxunix
-
-
-## Instaler la version de python pour pyenv
-CMD ["pyenv", "install", "3.13.7"]
+# Instaler la version de python pour pyenv
+#CMD ["pyenv", "install", "3.13.7"]
 
 # Lancer l'API REST du model en utilisant l'environnement viruel
 ENV PATH="$VENV_PATH/bin:$PATH"
