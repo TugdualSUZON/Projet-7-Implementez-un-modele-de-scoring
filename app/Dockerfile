@@ -1,3 +1,4 @@
+# Paramètre du docker pour le cloud render
 # Definir l'image de base pour le docker
 FROM ubuntu:resolute-20260106.1@sha256:f3218e7a90a09be6fa17dfba992ce84391701cd9a6fb0b2e7e084eb276da4e7a
 
@@ -73,12 +74,18 @@ COPY ./mlflow_to_deploy /app/mlflow_to_deploy
 # Définir le repertoire de travail
 WORKDIR /app
 
-# Lancer l'API REST du model en utilisant l'environnement viruel
-ENV PATH="$VENV_PATH/bin:$PATH"
-CMD ["python", "-m", "mlflow", "models", "serve", "-m", "./mlflow_to_deploy"]
+# Mlflow api
 # Exposer le port par défaut de mlflow
 EXPOSE 5000
-# ADD path to file
+# Lancer l'API REST du model en utilisant l'environnement viruel
+ENV PATH="$VENV_PATH/bin:$PATH"
+HEALTHCHECK CMD curl --fail http://localhost:5000/_stcore/health
+CMD ["python", "-m", "mlflow", "models", "serve", "-m", "./mlflow_to_deploy", "--port=5000", "--host=0.0.0.0"]
 
-# Lancer l'iinterface graphique pour intéroger l'API
-# CMD ["streamlit", "run", "P7_dashboard.py"]
+
+# Streamlit api
+# Exposer le port par défaut de stremlit
+EXPOSE 8501
+HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
+# Lancer l'interface graphique pour intéroger l'API
+CMD ["streamlit", "run", "P7_dashboard.py", "--server.port=8501", "--server.address=0.0.0.0"]
