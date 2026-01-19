@@ -90,4 +90,4 @@ COPY ./P7_dashboard.py /app/P7_dashboard.py
 EXPOSE 8501
 HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 # Lancer l'interface graphique pour intéroger l'API
-CMD ["streamlit", "run", "P7_dashboard.py", "--server.port=8501", "--server.address=0.0.0.0"]
+ENTRYPOINT ["streamlit", "run", "P7_dashboard.py", "--server.port=8501", "--server.address=0.0.0.0"]

@@ -15,7 +15,8 @@ def request_prediction(df):
     #csv_data = csv_buffer.getvalue() # Pour voir ce qu'il y a dans le fichier csv produit, peux aussi être passer à request
     
     response = requests.post(
-        url="http://127.0.0.1:5000/invocations",
+        # url="http://127.0.0.1:5000/invocations", # Pour l'utilisation en local
+        url="http://0.0.0.0:5000/invocations",
         data=csv_buffer,
         headers={"Content-Type": "text/csv"}
     )
@@ -56,3 +57,8 @@ Déterminer la probabilté de remboursement du client :
 
 if __name__ == '__main__':
     main()
+
+"""
+INFO:     Uvicorn running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:47046 - "HEAD / HTTP/1.1" 404 Not Found
+"""
