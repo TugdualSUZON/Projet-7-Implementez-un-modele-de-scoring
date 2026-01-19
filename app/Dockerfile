@@ -82,6 +82,8 @@ ENV PATH="$VENV_PATH/bin:$PATH"
 HEALTHCHECK CMD curl --fail http://localhost:5000/_stcore/health
 CMD ["python", "-m", "mlflow", "models", "serve", "-m", "./mlflow_to_deploy", "--port=5000", "--host=0.0.0.0"]
 
+# Récupération la configuration du dashboard       
+COPY ./P7_dashboard.py /app/P7_dashboard.py
 
 # Streamlit api
 # Exposer le port par défaut de stremlit
