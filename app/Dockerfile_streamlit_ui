@@ -22,15 +22,16 @@ ENV VENV_PATH=/opt/venv
 RUN python3 -m venv $VENV_PATH && \
     $VENV_PATH/bin/pip install --upgrade pip setuptools wheel
 
+# Récuperer les fichier pour l'ui
+COPY ./Streamlit_ui /app/ui
+
 # Instalation des package dans le venv
 #   - `--no-cache-dir` évite de laisser le cache dans l’image
 #   - `--disable-pip-version-check` accélère le build
 RUN $VENV_PATH/bin/pip install --no-cache-dir \
         --disable-pip-version-check \
-        -r /requirements_main.txt
+        -r ./app/ui/requirements_ui.txt
         
-# Récuperer les fichier pour l'ui
-COPY ./Streamlit_ui /app/ui
 # Définir le repertoire de travail
 WORKDIR app/ui
 

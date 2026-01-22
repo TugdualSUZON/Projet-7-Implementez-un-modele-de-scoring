@@ -47,7 +47,7 @@ COPY ./mlflow_api /app/api
 #   - `--disable-pip-version-check` accélère le build
 RUN $VENV_PATH/bin/pip install --no-cache-dir \
         --disable-pip-version-check \
-        -r /tmp/requirements_main.txt
+        -r /app/api/requirements_api.txt
 
 
 # Installer pyenv pour mlflow
