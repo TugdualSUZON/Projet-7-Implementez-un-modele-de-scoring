@@ -73,10 +73,10 @@ WORKDIR /app/api
 
 # Mlflow api
 # Exposer le port par défaut de mlflow
-EXPOSE 5000
+EXPOSE 10000
 # Lancer l'API REST du model en utilisant l'environnement viruel
 ENV PATH="$VENV_PATH/bin:$PATH"
 HEALTHCHECK CMD curl --fail http://localhost:5000/_stcore/health
-CMD ["python", "-m", "mlflow", "models", "serve", \ 
+CMD ["mlflow", "models", "serve", \ 
     "-m", "./mlflow_to_deploy", \
-    "--port=5000", "--host=0.0.0.0"]
+    "--port=10000", "--host=0.0.0.0"]
