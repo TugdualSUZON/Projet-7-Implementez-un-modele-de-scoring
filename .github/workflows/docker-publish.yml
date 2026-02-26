@@ -73,33 +73,6 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          
-      # Ad signature to the docker image directly in the repos
-      - name: Install cosign
-        uses: sigstore/cosign-installer@v2
-        with:
-          version: latest
-
-      - name: Create predicate file
-        run: |
-          cat > predicate.json <<'JSON'
-          {
-            "predicateType": "https://slsa.dev/provenance/v0.2",
-            "predicate": {
-              "builder": { "id": "docker-publish" },
-              "metadata": { "buildStartedOn": "$(date -u +%Y-%m-%dT%H:%M:%SZ)" },
-              "materials": [{ "uri": "git+https://github.com/${{ github.repository }}@${{ github.sha }}" }],
-              "subject": [{"name":"env.IMAGE_NAME", "digets":"${{ steps.build-and-push.outputs.digest }}"}] 
-            }
-          }
-          JSON
-
-      - name: Attest image (keyless)
-        env:
-          IMAGE: ${{ env.IMAGE }}
-        run: |
-          # Atteste en mode keyless (OIDC). Cosign utilisera le token OIDC du runner.
-          cosign attest --keyless --predicate predicate.json --type slsa $IMAGE
 
       # To know where and when the docker was build if repo publi or orga
       - name: Generate artifact attestation
