@@ -19,7 +19,14 @@ env:
 
 jobs:
   build-and-push-image:
-
+    - name: Get repository info
+      id: repo_info
+      run: |
+        repo="${{ github.repository }}"
+        resp=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${repo}")
+        echo "owner_type=$(echo "$resp" | jq -r .owner.type)" >> $GITHUB_OUTPUT
+        echo "is_private=$(echo "$resp" | jq -r .private)" >> $GITHUB_OUTPUT
+    
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -67,7 +74,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           
       # Ad signature to the docker image directly in the repos
-       - name: Install cosign
+      - name: Install cosign
         uses: sigstore/cosign-installer@v2
         with:
           version: latest
