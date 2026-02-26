@@ -13,13 +13,13 @@ on:
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
-  # github.repository as <account>/<repo>
-  IMAGE_NAME: predict_client_payment
+  # github.repository as <account>/<repo>/docker_name
+  IMAGE_NAME: ${{ github.repository_owner }}/${{ github.repository }}/predict_client_payment
 
 
 jobs:
   build-and-push-image:
-
+    
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -30,6 +30,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+
+      - name: Get repository info
+        id: repo_info
+        run: |
+          repo="${{ github.repository }}"
+          resp=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${repo}")
+          echo "owner_type=$(echo "$resp" | jq -r .owner.type)" >> $GITHUB_OUTPUT
+          echo "is_private=$(echo "$resp" | jq -r .private)" >> $GITHUB_OUTPUT
 
       # Set up BuildKit Docker container builder to be able to build
       # multi-platform images and export cache
@@ -66,11 +74,11 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-     
-      # To know where and when the docker was build
+      # To know where and when the docker was build if repo publi or orga
       - name: Generate artifact attestation
+        if: ${{ steps.repo_info.outputs.owner_type == 'Organization' || steps.repo_info.outputs.is_private == 'false' }}
         uses: actions/attest-build-provenance@v3
         with:
           subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
-          subject-digest: ${{ steps.push.outputs.digest }}
+          subject-digest: ${{ steps.build-and-push.outputs.digest }}
           push-to-registry: true
