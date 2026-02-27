@@ -11,7 +11,7 @@ on:
     branches:
       -"main"
     paths:
-      -"./app/mlflow_api/**"
+      -"app/mlflow_api/**"
 
 env:
   # Use docker.io for Docker Hub if empty
