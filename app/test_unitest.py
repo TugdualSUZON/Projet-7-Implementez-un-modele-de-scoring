@@ -50,6 +50,3 @@ def test_model_predict():
     
     # Assert , Le model renvio une prévision
     assert type(pred) != type(None)
-
-
-    
