@@ -15,7 +15,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.CR_PAT }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull Image
         run: docker pull ghcr.io/tugdualsuzon/tugdualsuzon/projet-7-implementez-un-modele-de-scoring/predict_client_payment:main
