@@ -1,10 +1,9 @@
 name: deploy_on_render_with_api_unit_test
 
 on:
-  workflow_run:
-    workflows: [Create and publish a Docker image to github package]
-    types:
-      - completed
+  push:
+    branches:
+      - 'main'
 
 jobs:
   deploy:
