@@ -1,9 +1,10 @@
 name: deploy_on_render_with_api_unit_test
 
 on:
-  push:
-    branches:
-      - 'main'
+   workflow_run:
+    workflows: [Create and publish a Docker image to github package]
+    types:
+      - completed
 
 jobs:
   deploy:
@@ -39,7 +40,3 @@ jobs:
       - name: Stop Container
         if: always()
         run: docker stop app || true
-
-      - name: Deploy to Render
-        if: ${{ success() }}
-        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
