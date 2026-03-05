@@ -4,11 +4,11 @@ dependencies:
 - python=3.3.7
 - pip:
   - pandas==2.3.3
-  - numpy==2.3.5
+  - numpy==1.26.4
   - mlflow==3.7.0
   - imbalanced-learn==0.14.1
   - scikit-learn==1.8.0
   - cloudpickle==3.1.2
-  - psutil==7.1.3
-  - pyarrow==22.0.0
-name: ml_flow_python_3_3_7
+  - psutil==7.2.2
+  - pyarrow==12.0.0
+name: projet_7_python_3_11_14
