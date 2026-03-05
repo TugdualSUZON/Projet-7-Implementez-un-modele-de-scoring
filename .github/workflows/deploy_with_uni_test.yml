@@ -1,9 +1,10 @@
 name: deploy_with_unit_test
 
 on:
-  registry_package:
-    types: [published]
-    
+  workflow_run:
+    workflows: [Create and publish a Docker image to github package]
+    types:
+      - completed
 
 jobs:
   deploy:
