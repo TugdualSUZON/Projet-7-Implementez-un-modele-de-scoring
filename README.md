@@ -2,9 +2,13 @@
 date : 06/03/2026  
 ## Objectif du projet  
 Ce projet vise à développer un modèle de scoring supervisé, suivi et déployé via une API. Il inclut la gestion du cycle de vie du modèle, ainsi que la mise en production et l’interface de test.  
-Le modèle développer ce base sur des infomations bancaires et a pour but de permettre aux équipes de décider d'accorder un prêt à un client. Pour ce faire le modèle associer aux clients une probabiltée d'appartenir aux clients qui ont rembourser. En ce basant sur cette probabilté et un seuil qui est déterminer durant l'entrainement, le modèle calsse les clients en :
-- 0 Le client est succéptible de rembourser
-- 1 Le client est succéptible de ne pas remboursser
+  
+Le code est versionner avec l'outil git et stocker sur github.  
+Github ce charge des test unitaire, de la construction du docker, stockage de l'image docker et de sont déploiment sur le servse cloud Render.  
+  
+Le modèle développer ce base sur des informations bancaires et a pour but de permettre aux équipes de décider d'accorder un prêt à un client. Pour ce faire le modèle associer aux clients une probabiltée d'appartenir aux clients qui ont remboursé. En ce basant sur cette probabilté et un seuil qui est déterminer durant l'entrainement, le modèle classe les clients en :
+- 0 Le client est susceptible de rembourser
+- 1 Le client est susceptible de ne pas rembourser
 
 ## Organisation du dossier API  
 - `/app` : dossier principal de l’application de prévision de renboursement des clients.  
@@ -36,8 +40,8 @@ Le modèle développer ce base sur des infomations bancaires et a pour but de pe
 - `/DataDrift_train_vs_test.html` : résultat de l'étude du datadrift avec evidently entre le jeux de données d'entrainement et de test.
 - `/launch_local_model.py` : script pour lancer l'api du model stocker dans `/app` en local.
 - `/launch_mlflow_ui.py` : script pour lancer l'ui de mlflow en local.
-- `README.md` : ce fichier
-- `test_unitest_locel.py` : script utiliser par unitest pour teste en local la présence du modèle et faire une prévision.
-- `requirements.txt` : liste des package de l'environnement conda utilisé.  
+- `/README.md` : ce fichier
+- `/test_unitest_locel.py` : script utiliser par unitest pour teste en local la présence du modèle et faire une prévision.
+- `/requirements.txt` : liste des package de l'environnement conda utilisé.  
   
 Chaque dossier contient le code lié à sa fonctionnalité, facilitant la maintenance et l’évolution du projet.
