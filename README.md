@@ -7,23 +7,31 @@ Le modèle développer ce base sur des infomations bancaires et a pour but de pe
 - 1 Le client est succéptible de ne pas remboursser
 
 ## Organisation du dossier API  
-- `/app` : dossier principal de l’application de prévision de renboursement des clients.
-  - `/mlflow_api` : dossier qui contient les fichiers pour le déploiment de l'api en docker.
-  - `/Streamlit_ui` : dossier qui contient les fichiers pour le déploiment de l'interface utilisateur.
-  - `/Dockerfile_mlflow_api` : dockerfile pour construire le docker qui permet de faire tourner l'api sur le cloud.
+- `/app` : dossier principal de l’application de prévision de renboursement des clients.  
+  
+  - `/mlflow_api` : dossier qui contient les fichiers pour le déploiment de l'api en docker.  
+  
     - `/mlflow_to_deploy` : dossier qui contient le model a déployer pour docker.
-    - `/requirements_api.txt` : requirement pour l'environnement dans le docker api.
-  - `/Dockerfile_mlflow_api` : !non fonctionnel! dockerfile pour construire le docker pour stremalit en cas de déloiment sur le même service cloud que l'api mlflow.
+    - `/requirements_api.txt` : requirement pour l'environnement dans le docker api.  
+
+  - `/Streamlit_ui` : dossier qui contient les fichiers pour le déploiment de l'interface utilisateur.  
+ 
     - `/P7_dashboard.py` : script python pour le dashboard de requête du modèle
-    - `/requirement_ui.txt` : requirement pour l'environnement dans le docker streamlit_ui.
+    - `/requirement_ui.txt` : requirement pour l'environnement dans le docker streamlit_ui.  
+  
+  - `/Dockerfile_mlflow_api` : dockerfile pour construire le docker qui permet de faire tourner l'api sur le cloud. 
+  - `/Dockerfile_mlflow_api` : !non fonctionnel! dockerfile pour construire le docker pour stremalit en cas de déloiment sur le même service cloud que l'api mlflow.
   - `/test_data.csv` : fichier qui permet contient une ligne du dataset d'entrainement et permet de tester l'api.  
   - `test_unitest.py` : fichier pour réaliser les unitests sur le cloud  
-  - `test_requirements.txt` : liste des packages Python requis pour unitest
-- `/data`
+  - `test_requirements.txt` : liste des packages Python requis pour unitest.  
+  
+- `/data` : Centraliser tous les fichiers de données à un seul endroit.  
+  
   - `/modeles` : dossier qui contient les models exporter volontairement de la base de données de mlflow et qui ont été déploiyer à un moment.
   - `/raw` : dossier pour les données brut du projte
   - `/transformed` : dossier pour les données issue du feature engineering et utiliser pour l'entrainement.
-  - `/mlflow.db` : base de données de mlflow tracker, contient le résultats des différents entrainements.
+  - `/mlflow.db` : base de données de mlflow tracker, contient le résultats des différents entrainements.  
+  
 - `/Suzon_Tugdual_2_notebook_modélisation_21112025` : notebook de feature engineering, d'entrainement de modèle tracker par mlflow, de sauvegarde du model en local or de la base de données de mlflow et étude du datadrift avec evidently.
 - `/DataDrift_train_vs_test.html` : résultat de l'étude du datadrift avec evidently entre le jeux de données d'entrainement et de test.
 - `/launch_local_model.py` : script pour lancer l'api du model stocker dans `/app` en local.
