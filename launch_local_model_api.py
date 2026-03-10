@@ -10,7 +10,7 @@ if __name__ == '__main__':
     import subprocess
     
     # Cd ce placer dans le même répertoire que la base de données de mlflow
-    os.chdir(./data)
+    os.chdir(r"./data")
     
     # Nom du model à charger depuis la base de donnée de mlflow
     model_name = "predict_client_payment" # Non du modèle dans le registre
@@ -18,7 +18,7 @@ if __name__ == '__main__':
     
     # Lancer le processus
     process = subprocess.Popen([
-        "mlflow", "models, ""server",
+        "mlflow", "models", "serve",
         "-m", f"models:/{model_name}@{model_version_alias}",
         "--host", "127.0.0.1",
         "--port", "10000"
