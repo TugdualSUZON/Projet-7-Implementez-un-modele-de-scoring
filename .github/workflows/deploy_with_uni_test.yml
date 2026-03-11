@@ -23,7 +23,7 @@ jobs:
         run: docker pull ghcr.io/tugdualsuzon/tugdualsuzon/projet-7-implementez-un-modele-de-scoring/predict_client_payment:main
 
       - name: Run Container
-        run: docker run -d -p 8080:10000 --name app docker pull ghcr.io/tugdualsuzon/tugdualsuzon/projet-7-implementez-un-modele-de-scoring/predict_client_payment:main
+        run: docker run -d -p 8080:10000 --name app ghcr.io/tugdualsuzon/tugdualsuzon/projet-7-implementez-un-modele-de-scoring/predict_client_payment:main
 
       - name: Smoke Test
         run: |
