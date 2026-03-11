@@ -6,6 +6,7 @@ on:
     workflows: [Create and publish a Docker image to github package]
     types:
       - completed
+   workflow_dispatch: # <-- permet de lancer manuellement depuis l'UI
 
 jobs:
   deploy:
