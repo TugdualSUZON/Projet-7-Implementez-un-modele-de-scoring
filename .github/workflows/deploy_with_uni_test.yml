@@ -25,7 +25,22 @@ jobs:
 
       - name: Run Container
         run: docker run -d -p 8080:10000 --name app ghcr.io/tugdualsuzon/tugdualsuzon/projet-7-implementez-un-modele-de-scoring/predict_client_payment:main
-
+      - name: Debug - container status and logs
+        if: failure() || always()
+        run: |
+          echo "=== docker ps -a ==="
+          docker ps -a
+          echo "=== docker inspect (ports) ==="
+          docker inspect app --format '{{json .NetworkSettings.Ports}}' || true
+          echo "=== docker logs app (last 200 lines) ==="
+          docker logs --tail 200 app || true
+      
+      - name: Debug - try curl inside container
+        if: failure() || always()
+        run: |
+          echo "=> curl inside container (localhost:10000)"
+          docker exec app sh -c "curl -fsS http://localhost:10000 || echo 'no response inside container'"
+        
       - name: Smoke Test
         run: |
           for i in {1..10}; do
@@ -38,7 +53,8 @@ jobs:
           done
           echo "Smoke test failed "
           exit 1
-
+      
       - name: Stop Container
         if: always()
-        run: docker stop app || true
+        run: | 
+          docker stop app || true
