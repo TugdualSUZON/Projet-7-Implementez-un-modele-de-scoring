@@ -15,8 +15,8 @@ flavors:
 is_signature_from_type_hint: false
 mlflow_version: 3.7.0
 model_id: null
-model_size_bytes: 1974991
-model_uuid: c086b3fb5f884640ba1ab156ab80e2a9
+model_size_bytes: 1595208
+model_uuid: dc7dac25a601407090b526eade1bb086
 prompts: null
 signature:
   inputs: '[{"type": "long", "name": "CODE_GENDER", "required": true}, {"type": "long",
@@ -752,4 +752,4 @@ signature:
   outputs: '[{"type": "double", "name": "TARGET", "required": true}]'
   params: null
 type_hint_from_example: false
-utc_time_created: '2026-03-10 16:27:07.425055'
+utc_time_created: '2026-03-13 08:33:04.728167'
